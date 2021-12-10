@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tri par Sélection</title>
+  </head>
+  <body>
+    <main>
+      <p id="tabNo1NonTrie"></p>
+      <p id="tabNo2NonTrie"></p>
+      <p id="tabNo1Trie"></p>
+      <p id="tabNo2Trie"></p>
+    </main>
+    <script>
+      /**
+       * Fonction calculant le minimum d'une suite
+       * @param tableau de nombre
+       * @return le minimum de la suite de nombres enregistrés dans le tableau
+       * @author Gavriilidis Alexandre <alexandregavriilidis@gmail.com>
+       */
+
+      const rerchercheDuMinimum = (tableau) => {
+        let min;
+
+        for (let i = 0; i < tableau.length; i++) {
+          if (min === undefined) {
+            min = tableau[0];
+          }
+
+          if (min > tableau[i + 1]) {
+            min = tableau[i + 1];
+          }
+        }
+
+        return min;
+      };
+
+      /**
+       * Fonction réalisant le tri par sélection
+       * Une boucle parcourt le tableau à trier
+       * Le nombre le plus petit est sélectionné dans le tableau et enregistré dans un nv tableau (tableauTrie)
+       * De sorte à mettre jour les minima, une copie du tableau passé en paramètre est effectué
+       * Cette copie va permettre de filtrer la suite en retirant à chaque fois le minimum
+       *
+       * @param tableau de nombre
+       * @return tableau trié
+       * @author Gavriilidis Alexandre <alexandregavriilidis@gmail.com>
+       */
+
+      const triParSelection = (tableau) => {
+        let indiceMinCourant;
+        let minCourant;
+        let tableauTrie = [];
+        let copieTableau = tableau;
+
+        for (let i = 0; i < tableau.length; i++) {
+          minCourant = rerchercheDuMinimum(copieTableau); //recherche du premier minimum dans le tableau
+          tableauTrie.push(minCourant);
+
+          copieTableau = copieTableau.filter((nbr, indice, tab) => {
+            return nbr !== minCourant;
+          });
+        }
+        return tableauTrie;
+      };
+
+      // Instanciation des tableaux pour tester l'algorithme
+      const nombres = [12, 10, 15, 11, 14, 13, 16];
+      const séries = [120, 20, 1, 12, 6, 43, 21];
+
+      // Sélection des éléments HTML
+      let p1 = document.getElementById("tabNo1NonTrie");
+      let p2 = document.getElementById("tabNo2NonTrie");
+      let p3 = document.getElementById("tabNo1Trie");
+      let p4 = document.getElementById("tabNo2Trie");
+
+      // Résultats dans le navigateur
+      p1.innerText = "Série no 1 non triée: " + nombres;
+      p2.innerText = "Série no 2 non triée: " + séries;
+      p3.innerText = "Série no 1 triée: " + triParSelection(nombres);
+      p4.innerText = "Série no 2 triée: " + triParSelection(séries);
+
+      //   Résultats dans la console d'affichage
+      console.log("Résultats affichés dans la console:");
+      console.log("Tableau #1 : Non trié", nombres);
+      console.log("Tableau #2 : Non trié", séries);
+      console.log("Tableau #1 : Trié", triParSelection(nombres));
+      console.log("Tableau #2: Trié", triParSelection(séries));
+    </script>
+  </body>
+</html>
