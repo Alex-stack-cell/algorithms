@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diviser pour régner</title>
+  </head>
+  <body>
+    <main>
+      <p>Résultats de l'agorithme présents dans la console du navigateur.</p>
+    </main>
+    <script>
+      /**
+       * Méthodologie : Diviser pour régner - Algortihme d'Euclide méthode récursive
+       *
+       * @author A. Gavriilidis <alexandregavriilidis@gmail.com>
+       * @version 0.1 21 DEC 2021
+       */
+      const pgcd = (a, b) => {
+        let reponse;
+        let r; // reste de la division entière
+        let temp; // les résultats de a et b seront transposés. Afin de ne pas écraser les données
+        // une variable temporaire "temp" est créée.
+
+        if (a < b) {
+          // Cas d'erreur
+          reponse = "Erreur : b>a !  ";
+        } else if (b === 0) {
+          // Cas de base
+          reponse = a;
+        } else {
+          // Cas récursif : Appel de la fonction pgcd
+          temp = b;
+          r = a % b;
+          b = r;
+          a = temp;
+          reponse = pgcd(a, b);
+        }
+        return reponse;
+      };
+
+      console.log(pgcd(640, 1680)); // Cas 1 : a<b - Output : Erreur : b>a !
+      console.log(pgcd(1680, 0)); // Cas 2 : b =0 - Output : 1680
+      console.log(pgcd(1680, 640)); // Cas 3 : a>b - Output : 80
+    </script>
+  </body>
+</html>
