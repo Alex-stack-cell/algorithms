@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Triage rapide : quicksort</title>
+  </head>
+  <body>
+    <p>Ouvrez la console du navigateur</p>
+    <script>
+      const quicksort = (arr) => {
+        if (arr.length < 2) {
+          // Cas de Base
+          return arr;
+        } else {
+          let pivot = [arr[0]]; // Partitionnement
+          let min = arr.filter((num) => num < pivot); // Retrouve le minimum
+          let max = arr.filter((num) => num > pivot); // Retrouve le maximum
+          // Combinaison
+          let solution = [].concat(quicksort(min), pivot, quicksort(max));
+          return solution;
+        }
+      };
+
+      let t1 = [];
+      let t2 = [7, 1];
+      let t3 = [33, 10, 15];
+      let t4 = [7, 33, 3, 10];
+
+      console.log("Triage de " + t1, quicksort(t1));
+      console.log("Triage de " + t2, quicksort(t2));
+      console.log("Triage de " + t3, quicksort(t3));
+      console.log("Triage de " + t4, quicksort(t4));
+    </script>
+  </body>
+</html>
